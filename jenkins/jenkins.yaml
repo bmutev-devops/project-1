@@ -3,3 +3,17 @@ jenkins:
   securityRealm:
     local:
       allowsSignup: false
+      enableCaptcha: false
+      users: [
+        UserWithPassword: { 
+          id: "grid",
+          name: "grid",
+          properties: [
+            myView: {primaryViewName: "myView"},
+            preferredProvider: {providerId: "default"},
+            timezone: {timeZoneName: "timezone"},
+            mailer: {emailAddress: "grid@grid.com"},
+            apiToken: "apiToken"
+          ]
+        }
+      ]
