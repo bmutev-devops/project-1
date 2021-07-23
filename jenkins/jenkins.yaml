@@ -1,19 +1,44 @@
 jenkins:
-  agentProtocols: ["JNLP4-connect", "Ping"]
+  agentProtocols: 
+    - "JNLP4-connect"
+    - "Ping"
+  disableRememberMe: false
+  numExecutors: 2
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
   securityRealm:
     local:
       allowsSignup: false
       enableCaptcha: false
-      users: [
-        UserWithPassword: { 
-          id: "grid",
-          name: "grid",
-          properties: [
-            myView: {primaryViewName: "myView"},
-            preferredProvider: {providerId: "default"},
-            timezone: {timeZoneName: "timezone"},
-            mailer: {emailAddress: "grid@grid.com"},
-            apiToken: "apiToken"
-          ]
-        }
-      ]
+      users:
+        - id: "grid"
+          name: "grid"
+          description: ""
+          properties:
+            - preferredProvider:
+                providerId: "default"
+            - timezone: 
+                timeZoneName: "timezone"
+            - mailer: 
+                emailAddress: "grid@grid.com"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  - list:
+      columns:
+        - "status"
+        - "jobName"
+        - "lastSuccess"
+        - "lastFailure"
+        - "lastDuration"
+        - "buildButton"
+      includeRegex: ".+"
+      name: "listView"
+  viewsTabBar: "standard"
